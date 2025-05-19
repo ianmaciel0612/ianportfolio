@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>teste</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-image: url("/img/Captura de tela 2025-05-06 231320.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      margin: 0;
+      height: 100vh;
+    }
+
+    header {
+      background: rgb(233, 231, 231);
+      height: 80px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .logo {
+      font-family: fantasy;
+      font-weight: bold;
+      color: #1c53a3;
+      margin-right: auto;
+      font-size: 24px;
+      line-height: 1.1;
+    }
+
+    nav {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    nav ul {
+      list-style-type: none;
+      display: flex;
+      gap: 40px;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      font-size: 25px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: rgb(48, 48, 146);
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: rgb(48, 48, 146);
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #0d2d6d;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 50px;
+      color: white;
+      height: calc(100vh - 80px);
+    }
+
+    .texto, .perfil {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+
+    .reveal.active .texto,
+    .reveal.active .perfil {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .texto {
+      max-width: 50%;
+      text-align: left;
+      font-size: 40px;
+    }
+
+    .texto h1 {
+      margin: 0;
+      line-height: 0.9;
+    }
+
+    .ola {
+      color:rgb(48, 48, 146);
+    }
+
+    .dev {
+      font-size: 30px;
+      color: rgb(25, 25, 201);
+    }
+
+    #typewriter {
+      color: #1162c1;
+    }
+
+    .perfil {
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+    }
+
+    button {
+      margin: 10px 10px 0 0;
+      padding: 10px 20px;
+      border: none;
+      background-color: rgb(48, 48, 146);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: rgb(30, 30, 100);
+    }
+
+    .sobre, .habilidades, .projetos {
+      font-size: 88px;
+      color: #1c53a3;
+      font-weight: bold;
+      font-family: 'Georgia', serif;
+      text-align: center;
+      margin-top: 150px;
+    }
+
+    .eu {
+      font-size: 22px;
+      font-weight: bold;
+      line-height: 1.8;
+      text-align: center;
+      padding: 0 40px;
+      color: black;
+      margin: 0 auto;
+    }
+
+    #typewriter::after {
+      content: "|";
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        padding: 30px 20px;
+      }
+
+      .texto {
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .perfil {
+        margin-top: 20px;
+      }
+
+      .sobre {
+        font-size: 60px;
+        margin-top: 100px;
+      }
+
+      .eu {
+        font-size: 18px;
+        padding: 0 20px;
+      }
+
+      nav {
+        position: static;
+        transform: none;
+        margin-top: 10px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo {
+        margin: 0 auto;
+        text-align: center;
+      }
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      max-width: 900px;
+      margin: 50px auto;
+    }
+
+    .box {
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      border-radius: 15px;
+      text-align: center;
+      padding: 15px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: rgb(55, 18, 189);
+    }
+
+    .car-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 70px;
+      justify-content: center;
+    }
+
+    .car-card {
+      background: rgba(255, 255, 255, 0.8); /* Fundo levemente transparente */
+      border: 2px solid rgba(48, 48, 146, 0.5); /* Borda com cor suave */
+      border-radius: 15px; /* Bordas arredondadas */
+      padding: 15px; /* Padding interno */
+      width: 100%;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Sombra mais suave */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .car-card img {
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    .car-card h3 {
+      margin: 10px 0; /* Margem ajustada */
+      color: rgb(48, 48, 146); /* Cor do título para harmonizar */
+    }
+
+    .car-card p {
+      font-weight: normal; /* Ajusta o peso da fonte */
+      color: #333; /* Cor do texto */
+    }
+
+    .car-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); /* Sombra mais intensa ao passar o mouse */
+    }
+
+    .car-card a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .car-card a:hover {
+      text-decoration: underline;
+      color: #1c53a3;
+    }
+
+    footer {
+      background: rgb(233, 231, 231);
+      display: flex;
+      justify-content: center; /* Centraliza as imagens */
+      align-items: center; /* Alinha verticalmente */
+      height: 50px; /* Aumenta a altura do rodapé */
+      padding: 10px; /* Espaçamento interno */
+    }
+
+    footer img {
+      margin: 0 10px; /* Espaçamento entre as imagens */
+      width: 30px; /* Tamanho das imagens */
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="logo">DEV <br>MACIEL</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#sobre-anchor">Sobre</a></li>
+        <li><a href="#habilidades-anchor">Habilidades</a></li>
+        <li><a href="#projetos-anchor">Projetos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="home" class="reveal">
+    <div class="texto">
+      <h1 class="ola">Olá, eu sou</h1>
+      <h1 id="typewriter"></h1>
+      <p class="dev">Desenvolvedor Front-end | HTML | CSS | JAVASCRIPT | REACT.JS</p>
+      <a href="/document/Currículo.pdf">
+        <button>Baixar Currículo</button>
+      </a>
+      <a href="https://chat.whatsapp.com/CsQvUdaTuRbEaubJibk9sk">
+        <button>Entre em Contato</button>
+      </a>
+    </div>
+    <img class="perfil" src="img/WhatsApp Image 2025-04-18 at 3.59.11 PM (1).jpeg" alt="Foto de Ian Maciel">
+  </main>
+
+  <div id="sobre-anchor" style="height: 100px; margin-top: -100px;"></div>
+  <section id="sobre" class="reveal">
+    <h1 class="sobre">SOBRE MIM</h1>
+    <p class="eu">
+      Olá, sou Ian Maciel, tenho 19 anos e sou Desenvolvedor Front-End com mais de 3 anos de experiência.<br>
+      Atualmente, curso Ciência da Computação na Unijorge, o que tem aprimorado minha base teórica e prática.<br>
+      Tenho interesse em me tornar um profissional Full Stack, estudando ferramentas como Node.js e Python.<br>
+      Meu objetivo é contribuir de forma estratégica em projetos que exijam performance, usabilidade e qualidade de código.<br>
+      Acredito na educação contínua e no trabalho em equipe para impactar positivamente as pessoas.
+    </p>
+  </section>
+
+  <div id="habilidades-anchor" style="height: 100px; margin-top: -100px;"></div>
+  <section id="habilidades" class="reveal">
+    <h1 class="habilidades">HABILIDADES</h1>
+    <div class="cards">
+      <div class="box"><p>HTML5</p><img src="img/html.png" width="80px" alt=""></div>
+      <div class="box"><p>CSS3</p><img src="img/css.png" width="70px" alt=""></div>
+      <div class="box"><p>JavaScript</p><img src="img/js.png" width="80px" alt=""></div>
+      <div class="box"><p>Python</p><img src="img/python.png" width="80px"></div>
+      <div class="box"><p>React.js</p><img src="img/React js.webp" width="80px" alt=""></div>
+      <div class="box"><p>Node.js</p><img src="img/node.png" width="80px" alt=""></div>
+    </div>
+  </section>
+
+  <div id="projetos-anchor" style="height: 100px; margin-top: -100px;"></div>
+  <section id="projetos" class="reveal">
+    <h1 class="projetos">PROJETOS</h1>
+    <div class="car-grid">
+      <div class="car-card"><img src="img/calculadora.png" alt="Toyota Corolla 2018"><a href="https://github.com/ianmaciel0612/calculadora"><h3>CLONE CALCULADORA WINDOWS</h3></a><a href=""><button>ABRIR</button><p>calculadora feita com html,css e  JavaScript</p></div></a>
+      <div class="car-card"><img src="img/confeitaria.png" alt="Ferrari Spider 2015"><a href="https://github.com/ianmaciel0612/confeitaria-"><h3>CONFEITARIA</h3></a><a href=""><button>ABRIR</button><p>Ladinpage de confeitaria, projeto feito para um cliente usando html, css e react</p></div></a>
+      <div class="car-card"><img src="img/mercado.png" alt="BMW M3 2017"><a href="https://euggabriell.github.io/av1-dev-web/pages/produto.html"><h3>MERCADO ORIGINAL</h3></a><a href="https://euggabriell.github.io/av1-dev-web/pages/produto.html"><button>ABRIR</button><p>Projeto de pagina de mercado, feito por mim usando html, css e JavaScript</p></div></a>
+      <div class="car-card"><img src="img/loginpage.png" alt="Honda Civic G10 2017"><a href="https://github.com/ianmaciel0612/loginpage"><h3>PÁGINA DE LOGIN SIMPLES</h3></a><a href="https://ianmaciel0612.github.io/loginpage/"><button>ABRIR</button><p>Uma pagina de login simples usando html e css</p></div></a>
+      <div class="car-card"><img src="img/grid.png" alt="Porsche 911 2018"><a href="https://github.com/ianmaciel0612/newgrid-control"><h3>LADIN PAGE USANDO GRID-CSS</h3></a><a href="https://ianmaciel0612.github.io/newgrid-control/"><button>ABRIR</button><p>Nessa ladinpage eu produzi usando html e usando o layout GRID-CSS</p></div></a>
+      <div class="car-card"><img src="img/youtube clone.png" alt="Audi RS6 2015"><a href="https://github.com/ianmaciel0612/youtube"><h3>PAGINA DE VIDEO DO YOUTUBE</h3></a><a href="https://ianmaciel0612.github.io/youtube/"><button>ABRIR</button><p>Pagina de video do Youtube, usando html, react e css</p></div></a>
+    </div>
+  </section>
+  <br><br><br>
+  <footer>
+    <a href="https://github.com/ianmaciel0612"><img src="img/github.png" alt=""></a>
+   <a href="https://www.linkedin.com/in/devianmaciel/"><img src="img/linkedin.png" alt=""></a>
+    <img src="img/ok.png" alt="">
+   <a href="https://chat.whatsapp.com/CsQvUdaTuRbEaubJibk9sk"><img src="img/de vdd.png" alt=""></a> 
+  </footer>
+
+</body>
+<script>
+  const texto = "Ian Maciel ;)";
+  const el = document.getElementById("typewriter");
+  let i = 0;
+  function digitar() {
+    if (i < texto.length) {
+      el.innerHTML += texto.charAt(i);
+      i++;
+      setTimeout(digitar, 300);
+    }
+  }
+
+  window.onload = () => {
+    digitar();
+    document.getElementById("home").classList.add("active");
+  };
+
+  function revealOnScroll() {
+    const reveals = document.querySelectorAll(".reveal");
+    for (const el of reveals) {
+      const windowHeight = window.innerHeight;
+      const elementTop = el.getBoundingClientRect().top;
+      const elementBottom = el.getBoundingClientRect().bottom;
+      const revealPoint = 150;
+
+      if (elementTop < windowHeight - revealPoint && elementBottom > 0) {
+        el.classList.add("active");
+      } else {
+        el.classList.remove("active");
+      }
+    }
+  }
+
+  window.addEventListener("scroll", revealOnScroll);
+</script>
+</html>

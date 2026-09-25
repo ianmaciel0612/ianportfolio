@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>teste</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+  body {
+  background-color: #6e7c94;
+  margin: 0;
+  height: 100vh;
+}
+
+    header {
+      background: rgb(233, 231, 231);
+      height: 80px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .logo {
+      font-family: fantasy;
+      font-weight: bold;
+      color: #1c53a3;
+      margin-right: auto;
+      font-size: 24px;
+      line-height: 1.1;
+    }
+
+    nav {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    nav ul {
+      list-style-type: none;
+      display: flex;
+      gap: 40px;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      font-size: 25px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: rgb(48, 48, 146);
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: rgb(48, 48, 146);
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #0d2d6d;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 32px;
+      color: rgb(48, 48, 146);
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 50px;
+      color: white;
+      height: calc(100vh - 80px);
+    }
+
+    .texto, .perfil {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+
+    .reveal.active .texto,
+    .reveal.active .perfil {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .texto {
+      max-width: 50%;
+      text-align: left;
+      font-size: 40px;
+    }
+
+    .texto h1 {
+      margin: 0;
+      line-height: 0.9;
+    }
+
+    .ola {
+      color:rgb(48, 48, 146);
+    }
+
+    .dev {
+      font-size: 30px;
+      color: rgb(25, 25, 201);
+    }
+
+    #typewriter {
+      color: #1162c1;
+    }
+
+    .perfil {
+      width: 400px;
+      height:400px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+    }
+
+    button {
+      margin: 10px 10px 0 0;
+      padding: 10px 20px;
+      border: none;
+      background-color: rgb(48, 48, 146);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: rgb(30, 30, 100);
+    }
+
+    .sobre, .habilidades, .projetos, .cursos {
+      font-size: 88px;
+      color: #1c53a3;
+      font-weight: bold;
+      font-family: 'Georgia', serif;
+      text-align: center;
+      margin: 0 0 20px 0;
+    }
+
+    .eu {
+      font-size: 17px;
+      font-weight: bold;
+      line-height: 1.5;
+      text-align: justify;
+      color: black;
+      margin: 0;
+    }
+
+   .sobre-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .sobre-texto {
+      flex: 0 1 600px;
+      max-width: 600px;
+    }
+
+    .sobre-imagens {
+      flex: 0 1 auto;
+      max-width: 600px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+   #typewriter::after {
+      content: "|";
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #sobre, #cursos, #habilidades, #projetos {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        padding: 30px 20px;
+      }
+
+      .texto {
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .perfil {
+        margin-top: 20px;
+      }
+
+      .sobre {
+        font-size: 60px;
+        margin-top: 100px;
+      }
+
+      .eu {
+        font-size: 18px;
+        padding: 0 20px;
+      }
+
+      .sobre-content {
+        flex-direction: column;
+        padding: 0 20px;
+      }
+
+      .sobre-texto, .sobre-imagens {
+        max-width: 100%;
+      }
+
+     .menu-toggle {
+        display: block;
+      }
+
+      nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgb(233, 231, 231);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        transform: none;
+        z-index: 999;
+      }
+
+      nav.active {
+        max-height: 400px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 20px 0;
+        margin: 0;
+      }
+
+      .logo {
+        margin: 0 auto;
+        text-align: center;
+      }
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      max-width: 900px;
+      margin: 30px auto;
+    }
+
+    .box {
+      width: 110px;
+      height: 110px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      border-radius: 15px;
+      text-align: center;
+      padding: 10px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: rgb(55, 18, 189);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .box:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .car-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 50px;
+      justify-content: center;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+   .car-card {
+      background: rgba(255, 255, 255, 0.8); /* Fundo levemente transparente */
+      border: 2px solid rgba(48, 48, 146, 0.5); /* Borda com cor suave */
+      border-radius: 15px; /* Bordas arredondadas */
+      padding: 10px; /* Padding interno */
+      width: 100%;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Sombra mais suave */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+
+   .car-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 8px;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+   .car-card h3 {
+      margin: 8px 0; /* Margem ajustada */
+      color: rgb(48, 48, 146); /* Cor do título para harmonizar */
+      font-size: 18px;
+    }
+
+    .car-card p {
+      font-weight: normal; /* Ajusta o peso da fonte */
+      color: #333; /* Cor do texto */
+    }
+
+    .car-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); /* Sombra mais intensa ao passar o mouse */
+    }
+
+    .car-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .car-card a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .car-card a:hover {
+      text-decoration: underline;
+      color: #1c53a3;
+    }
+
+    .cursos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.curso-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid rgba(48, 48, 146, 0.5);
+  border-radius: 15px;
+  padding: 20px;
+  width: 260px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.curso-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.curso-card h3 {
+  margin: 10px 0 5px 0;
+  color: rgb(48, 48, 146);
+  font-size: 20px;
+}
+
+.curso-card p {
+  color: #333;
+  font-size: 15px;
+  margin: 5px 0;
+}
+
+.curso-card a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.video-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-modal.active {
+  display: flex;
+}
+
+.video-modal-content {
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  max-width: 900px;
+  width: 90%;
+  position: relative;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.video-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 32px;
+  cursor: pointer;
+  color: rgb(48, 48, 146);
+  line-height: 1;
+}
+
+.video-modal-body {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.video-modal-body video {
+  flex: 1 1 420px;
+  max-width: 100%;
+  width: 420px;
+  height: 260px;
+  border-radius: 8px;
+  background: black;
+}
+
+.video-modal-desc {
+  flex: 1 1 250px;
+}
+
+.video-modal-desc h3 {
+  color: rgb(48, 48, 146);
+  margin-top: 0;
+}
+
+.video-modal-desc p {
+  color: #333;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .video-modal-body {
+    flex-direction: column;
+  }
+}
+
+
+    footer {
+      background: rgb(233, 231, 231);
+      display: flex;
+      justify-content: center; /* Centraliza as imagens */
+      align-items: center; /* Alinha verticalmente */
+      height: 50px; /* Aumenta a altura do rodapé */
+      padding: 10px; /* Espaçamento interno */
+    }
+
+    footer img {
+      margin: 0 10px; /* Espaçamento entre as imagens */
+      width: 30px; /* Tamanho das imagens */
+    }
+
+  </style>
+</head>
+<body>
+ <header>
+    <h1 class="logo">DEV <br>MACIEL</h1>
+    <button class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#sobre-anchor">Sobre</a></li>
+        <li><a href="#cursos-anchor"> Certificados</a></li>
+        <li><a href="#habilidades-anchor">Habilidades</a></li>
+        <li><a href="#projetos-anchor">Projetos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="home" class="reveal">
+    <div class="texto">
+     <h1 class="ola" id="ola-typewriter"></h1>
+      <h1 id="typewriter"></h1>
+      <p class="dev">Desenvolvedor Front-end | HTML | CSS | JAVASCRIPT | REACT.JS</p>
+      <a href="/ianportfolio/document/Currículo Ian Maciel Ribas da Cruz .pdf">
+        <button>Baixar Currículo</button>
+      </a>
+      <a href="https://chat.whatsapp.com/BTS1Rlcdvaf1bOOIHGhqpW">
+        <button>Entre em Contato</button>
+      </a>
+    </div>
+    <img class="perfil" src="img/minha foto.jpg" alt="Foto de Ian Maciel">
+  </main>
+
+  <div id="sobre-anchor" style="height: 100px; margin-top: -100px;"></div>
+  <section id="sobre" class="reveal">
+    <h1 class="sobre">SOBRE MIM</h1>
+    <div class="sobre-content">
+      <p class="eu sobre-texto">
+        Olá, sou Ian Maciel, estudante de Engenharia de Software e entusiasta da tecnologia. Sou Desenvolvedor Full Stack, apaixonado por desenvolvimento Web e pela criação de soluções que resolvam problemas reais.
+        <br>
+        Tenho conhecimentos em Python, SQL, MongoDB, HTML e CSS, além de lógica de programação, bancos de dados e infraestrutura. Tenho interesse especial no desenvolvimento de SaaS e gosto de transformar ideias em aplicações funcionais, buscando sempre aprender novas tecnologias e aprimorar meus projetos.
+      </p>
+      <div class="sobre-imagens">
+        <!-- adicione suas imagens aqui, ex: <img src="img/foto1.png" width="200px"> -->
+      </div>
+    </div>
+  </section>
+  <br><br>
+  <div id="cursos-anchor" style="height: 100px; margin-top: -100px;"></div>
+<section id="cursos" class="reveal">
+  <h1 class="cursos"> CERTIFICADOS</h1>
+  <div class="cursos-grid">
+    <div class="curso-card">
+      <h3>Nome do Curso 1</h3>
+      <p>Instituição / Plataforma</p>
+      <p>Ano de conclusão</p>
+      <a href="#"><button>VER CERTIFICADO</button></a>
+    </div>
+    <div class="curso-card">
+      <h3>Nome do Curso 2</h3>
+      <p>Instituição / Plataforma</p>
+      <p>Ano de conclusão</p>
+      <a href="#"><button>VER CERTIFICADO</button></a>
+    </div>
+    <div class="curso-card">
+      <h3>Nome do Curso 3</h3>
+      <p>Instituição / Plataforma</p>
+      <p>Ano de conclusão</p>
+      <a href="#"><button>VER CERTIFICADO</button></a>
+    </div>
+  </div>
+</section>
+
+
+  <div id="habilidades-anchor" style="height: 100px; margin-top: -100px;"></div>
+  <section id="habilidades" class="reveal">
+    <h1 class="habilidades">HABILIDADES</h1>
+   <div class="cards">
+      <div class="box"><p>HTML5</p><img src="img/html.png" width="80px" alt=""></div>
+      <div class="box"><p>CSS3</p><img src="img/css.png" width="70px" alt=""></div>
+      <div class="box"><p>JavaScript</p><img src="img/js.png" width="80px" alt=""></div>
+      <div class="box"><p>Python</p><img src="img/python.png" width="80px"></div>
+      <div class="box"><p>React.js</p><img src="img/React js.webp" width="80px" alt=""></div>
+      <div class="box"><p>Node.js</p><img src="img/node.png" width="80px" alt=""></div>
+      <div class="box"><p>MongoDB</p><img src="img/mongodb-removebg-preview.png" width="80px" alt=""></div>
+      <div class="box"><p>SQL</p><img src="img/logo_sql-removebg-preview.png" width="80px" alt=""></div>
+      <div class="box"><p>C</p><img src="img/images-removebg-preview.png
+        " width="80px" alt=""></div>
+    </div>
+  </section>
+    <br><br>
+  <div id="projetos-anchor" style="height: 100px; margin-top: -100px;"></div>
+  <section id="projetos" class="reveal">
+    <h1 class="projetos">PROJETOS</h1>
+    <div class="car-grid">
+      <div class="car-card"><img src="img/calculadora.png" alt="Toyota Corolla 2018" style="cursor:pointer;" onclick="openProjectVideo('videos/calculadora.mp4', 'CLONE CALCULADORA WINDOWS', 'Calculadora feita com HTML, CSS e JavaScript, replicando as funcionalidades básicas da calculadora do Windows.')"><a href="https://github.com/ianmaciel0612/calculadora"><h3>CLONE CALCULADORA WINDOWS</h3></a><a href=""><button>ABRIR</button><p>calculadora feita com html,css e  JavaScript</p></div></a>
+
+      <div class="car-card"><img src="img/confeitaria.png" alt="Ferrari Spider 2015" style="cursor:pointer;" onclick="openProjectVideo('videos/confeitaria.mp4', 'CONFEITARIA', 'Landing page de confeitaria, projeto feito para um cliente usando HTML, CSS e React.')"><a href="https://github.com/ianmaciel0612/confeitaria-"><h3>CONFEITARIA</h3></a><a href=""><button>ABRIR</button><p>Ladinpage de confeitaria, projeto feito para um cliente usando html, css e react</p></div></a>
+
+      <div class="car-card"><img src="img/mercado.png" alt="BMW M3 2017" style="cursor:pointer;" onclick="openProjectVideo('videos/mercado.mp4.mp4', 'MERCADO ORIGINAL', 'Projeto de página de mercado, feito usando HTML, CSS e JavaScript.')"><a href="https://euggabriell.github.io/av1-dev-web/pages/produto.html"><h3>MERCADO ORIGINAL</h3></a><a href="https://euggabriell.github.io/av1-dev-web/pages/produto.html"><button>ABRIR</button><p>Projeto de pagina de mercado, feito por mim usando html, css e JavaScript</p></div></a>
+
+      <div class="car-card"><img src="img/loginpage.png" alt="Honda Civic G10 2017" style="cursor:pointer;" onclick="openProjectVideo('videos/loginpage.mp4', 'PÁGINA DE LOGIN SIMPLES', 'Uma página de login simples desenvolvida usando HTML e CSS.')"><a href="https://github.com/ianmaciel0612/loginpage"><h3>PÁGINA DE LOGIN SIMPLES</h3></a><a href="https://ianmaciel0612.github.io/loginpage/"><button>ABRIR</button><p>Uma pagina de login simples usando html e css</p></div></a>
+
+      <div class="car-card"><img src="img/grid.png" alt="Porsche 911 2018" style="cursor:pointer;" onclick="openProjectVideo('videos/grid.mp4', 'LANDING PAGE USANDO GRID-CSS', 'Landing page desenvolvida usando HTML e o layout Grid-CSS.')"><a href="https://github.com/ianmaciel0612/newgrid-control"><h3>LADIN PAGE USANDO GRID-CSS</h3></a><a href="https://ianmaciel0612.github.io/newgrid-control/"><button>ABRIR</button><p>Nessa ladinpage eu produzi usando html e usando o layout GRID-CSS</p></div></a>
+
+      <div class="car-card"><img src="img/youtube clone.png" alt="Audi RS6 2015" style="cursor:pointer;" onclick="openProjectVideo('videos/youtube.mp4', 'PÁGINA DE VÍDEO DO YOUTUBE', 'Página de vídeo do YouTube, desenvolvida usando HTML, React e CSS.')"><a href="https://github.com/ianmaciel0612/youtube"><h3>PAGINA DE VIDEO DO YOUTUBE</h3></a><a href="https://ianmaciel0612.github.io/youtube/"><button>ABRIR</button><p>Pagina de video do Youtube, usando html, react e css</p></div></a>
+    </div>
+  </section>
+  <br><br><br>
+  <footer>
+    <a href="https://github.com/ianmaciel0612"><img src="img/github.png" alt=""></a>
+   <a href="https://www.linkedin.com/in/devianmaciel/"><img src="img/linkedin.png" alt=""></a>
+    <img src="img/ok.png" alt="">
+   <a href="https://chat.whatsapp.com/CsQvUdaTuRbEaubJibk9sk"><img src="img/de vdd.png" alt=""></a> 
+  </footer>
+  <div class="video-modal" id="video-modal">
+  <div class="video-modal-content">
+    <span class="video-modal-close" onclick="closeProjectVideo()">&times;</span>
+    <div class="video-modal-body">
+      <video id="video-modal-player" controls></video>
+      <div class="video-modal-desc">
+        <h3 id="video-modal-title"></h3>
+        <p id="video-modal-description"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script>
+  const texto = "Ian Maciel ;)";
+  const textoOla = "Olá, eu sou";
+  const el = document.getElementById("typewriter");
+  const elOla = document.getElementById("ola-typewriter");
+  let i = 0;
+  let j = 0;
+
+  function digitarOla() {
+    if (j < textoOla.length) {
+      elOla.innerHTML += textoOla.charAt(j);
+      j++;
+      setTimeout(digitarOla, 100);
+    } else {
+      digitar();
+    }
+  }
+
+  function digitar() {
+    if (i < texto.length) {
+      el.innerHTML += texto.charAt(i);
+      i++;
+      setTimeout(digitar, 300);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    digitarOla();
+    document.getElementById("home").classList.add("active");
+  });
+
+   function openProjectVideo(videoSrc, title, description) {
+  const modal = document.getElementById("video-modal");
+  const player = document.getElementById("video-modal-player");
+  document.getElementById("video-modal-title").textContent = title;
+  document.getElementById("video-modal-description").textContent = description;
+  player.src = videoSrc;
+  modal.classList.add("active");
+  player.play();
+}
+
+function closeProjectVideo() {
+  const modal = document.getElementById("video-modal");
+  const player = document.getElementById("video-modal-player");
+  player.pause();
+  player.src = "";
+  modal.classList.remove("active");
+}
+
+ function toggleMenu() {
+  const nav = document.getElementById("nav-menu");
+  const btn = document.getElementById("menu-toggle");
+  nav.classList.toggle("active");
+  btn.textContent = nav.classList.contains("active") ? "✕" : "☰";
+}
+
+function revealOnScroll() {
+  const reveals = document.querySelectorAll(".reveal");
+  for (const el of reveals) {
+    const windowHeight = window.innerHeight;
+    const elementTop = el.getBoundingClientRect().top;
+    const elementBottom = el.getBoundingClientRect().bottom;
+    const revealPoint = 150;
+
+    if (elementTop < windowHeight - revealPoint && elementBottom > 0) {
+      el.classList.add("active");
+    } else {
+      el.classList.remove("active");
+    }
+  }
+}
+
+  window.addEventListener("scroll", revealOnScroll);
+</script>
+</html>
